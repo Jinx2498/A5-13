@@ -180,11 +180,54 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cdc71e6a544cbe54a82e00009b5b6dc1, type: 3}
+--- !u!1 &312754826 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2632687946072245328, guid: cdc71e6a544cbe54a82e00009b5b6dc1, type: 3}
+  m_PrefabInstance: {fileID: 115912994}
+  m_PrefabAsset: {fileID: 0}
+--- !u!208 &312754827
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 312754826}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &760373109 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9101725072495849436, guid: 9d85f0e880102234cb8a0ae1432c6558, type: 3}
   m_PrefabInstance: {fileID: 870792686}
   m_PrefabAsset: {fileID: 0}
+--- !u!195 &760373110
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 760373109}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 1
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!4 &760373113 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3454428565286155500, guid: 9d85f0e880102234cb8a0ae1432c6558, type: 3}
@@ -203,7 +246,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 2060458933}
-  agent: {fileID: 0}
+  agent: {fileID: 760373110}
 --- !u!1001 &870792686
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -277,6 +320,7 @@ GameObject:
   - component: {fileID: 1072829331}
   - component: {fileID: 1072829330}
   - component: {fileID: 1072829329}
+  - component: {fileID: 1072829333}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Untagged
@@ -361,6 +405,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!191 &1072829333
+OffMeshLink:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1072829328}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_AreaIndex: 0
+  m_AgentTypeID: 0
+  m_Start: {fileID: 0}
+  m_End: {fileID: 0}
+  m_CostOverride: -1
+  m_BiDirectional: 1
+  m_Activated: 1
+  m_AutoUpdatePositions: 0
 --- !u!1 &1658450071
 GameObject:
   m_ObjectHideFlags: 0
