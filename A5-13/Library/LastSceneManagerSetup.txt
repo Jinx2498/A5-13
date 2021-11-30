@@ -1,5 +1,1 @@
-sceneSetups:
-- path: Assets/A5-13.unity
-  isLoaded: 1
-  isActive: 1
-  isSubScene: 0
+sceneSetups: []
