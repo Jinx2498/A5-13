@@ -35,8 +35,6 @@ public class MazeMeshGenerator {
                 
                     AddQuad(Matrix4x4.TRS(new Vector3(j * width, 0, i * width), Quaternion.LookRotation(Vector3.up), new Vector3(width, width, 1)), ref newVertices, ref newUVs, ref floorTriangles);
 
-                    AddQuad(Matrix4x4.TRS( new Vector3(j * width, height, i * width), Quaternion.LookRotation(Vector3.down), new Vector3(width, width, 1)), ref newVertices, ref newUVs, ref floorTriangles);
-
                     if (i - 1 < 0 || data[i-1, j] == 1) {
 
                         AddQuad(Matrix4x4.TRS(new Vector3(j * width, halfH, (i-.5f) * width), Quaternion.LookRotation(Vector3.forward), new Vector3(width, height, 1)), ref newVertices, ref newUVs, ref wallTriangles);
