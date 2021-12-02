@@ -964,7 +964,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1675499958}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5000001
   m_Height: 2
@@ -1251,6 +1251,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 1789405887}
   agent: {fileID: 2033395951}
+--- !u!54 &2033395953
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2033395950}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!4 &2033395954 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3454428565286155500, guid: 9d85f0e880102234cb8a0ae1432c6558, type: 3}

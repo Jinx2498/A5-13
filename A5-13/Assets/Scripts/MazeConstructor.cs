@@ -120,8 +120,6 @@ public class MazeConstructor : MonoBehaviour {
         PlaceGoalTrigger(goalCallback);
 
         // place coins in maze
-        Debug.Log("maxrows: " + data.GetUpperBound(0));
-        Debug.Log("maxcols: " + data.GetUpperBound(1));
         GameObject coin0 = GameObject.Find("CoinTemplate");
         int numCoins = Random.Range(4, 8);
         for (int i = 0; i < numCoins; ++i)

@@ -15,4 +15,10 @@ public class Collectible : MonoBehaviour
     {
         transform.Rotate(0, 0, 360 * Time.deltaTime);
     }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("TODO +1 coin");
+        Destroy(gameObject);
+    }
 }
