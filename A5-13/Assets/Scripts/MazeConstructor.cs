@@ -100,7 +100,7 @@ public class MazeConstructor : MonoBehaviour {
         
         if (sizeRows % 2 == 0 && sizeColumns % 2 == 0) {
             
-            Debug.LogError("Odd numbers work better for dungeon size.");
+            Debug.LogError("Odd numbers work better.");
         
         }
 
