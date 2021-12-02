@@ -111,6 +111,8 @@ public class MazeConstructor : MonoBehaviour {
         PlaceStartTrigger(startCallback);
         PlaceGoalTrigger(goalCallback);
 
+        // place coins in maze
+
     }
 
     private void FindStartPosition() {
