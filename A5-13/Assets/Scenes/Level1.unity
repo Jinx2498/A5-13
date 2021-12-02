@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641234, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1096,7 +1096,7 @@ MonoBehaviour:
   mazeMaterial1: {fileID: 2100000, guid: 0e8bd2aca84ffa04eaab00f0b1479a5a, type: 2}
   mazeMaterial2: {fileID: 2100000, guid: bf3a24645c2e2db45a34269b6cfe2c41, type: 2}
   startMaterial: {fileID: 2100000, guid: c8fef8d3c86454839a3bd91de6ff4bf0, type: 2}
-  treasureMaterial: {fileID: 2100000, guid: 199920f03ca8d48b883e5d36d7f731d0, type: 2}
+  endMaterial: {fileID: 2100000, guid: 199920f03ca8d48b883e5d36d7f731d0, type: 2}
   surface: {fileID: 195275453}
 --- !u!4 &1683294973
 Transform:
