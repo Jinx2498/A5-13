@@ -321,10 +321,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   showDebug: 0
-  mazeMat1: {fileID: 2100000, guid: 0e8bd2aca84ffa04eaab00f0b1479a5a, type: 2}
-  mazeMat2: {fileID: 2100000, guid: bf3a24645c2e2db45a34269b6cfe2c41, type: 2}
-  startMat: {fileID: 2100000, guid: c8fef8d3c86454839a3bd91de6ff4bf0, type: 2}
-  treasureMat: {fileID: 2100000, guid: 199920f03ca8d48b883e5d36d7f731d0, type: 2}
+  mazeMaterial1: {fileID: 2100000, guid: 0e8bd2aca84ffa04eaab00f0b1479a5a, type: 2}
+  mazeMaterial2: {fileID: 2100000, guid: bf3a24645c2e2db45a34269b6cfe2c41, type: 2}
+  startMaterial: {fileID: 2100000, guid: c8fef8d3c86454839a3bd91de6ff4bf0, type: 2}
+  treasureMaterial: {fileID: 2100000, guid: 199920f03ca8d48b883e5d36d7f731d0, type: 2}
 --- !u!4 &1683294973
 Transform:
   m_ObjectHideFlags: 0
