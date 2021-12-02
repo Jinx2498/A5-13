@@ -58,7 +58,7 @@ public class GameController : MonoBehaviour {
 
     private void OnGoalTrigger(GameObject trigger, GameObject other)
     {
-        Debug.Log("TODO next level");
+        GameObject.Find("Scores").GetComponent<Scores>().level++;
         SceneManager.LoadScene("Level1");
     }
 

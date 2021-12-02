@@ -18,7 +18,7 @@ public class Collectible : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        Debug.Log("TODO +1 coin");
+        GameObject.Find("Scores").GetComponent<Scores>().coins++;
         Destroy(gameObject);
     }
 }
