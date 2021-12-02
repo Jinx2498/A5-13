@@ -6,10 +6,10 @@ public class MazeConstructor : MonoBehaviour {
     
     public bool showDebug;
     
-    [SerializeField] private Material mazeMat1;
-    [SerializeField] private Material mazeMat2;
-    [SerializeField] private Material startMat;
-    [SerializeField] private Material treasureMat;
+    [SerializeField] private Material mazeMaterial1;
+    [SerializeField] private Material mazeMaterial2;
+    [SerializeField] private Material startMaterial;
+    [SerializeField] private Material treasureMaterial;
     private MazeDataGenerator dataGenerator;
     private MazeMeshGenerator meshGenerator;
 
@@ -19,13 +19,13 @@ public class MazeConstructor : MonoBehaviour {
 
     }
 
-    public float hallWidth {
+    public float hallwayWidth {
         
         get; private set;
     
     }
 
-    public float hallHeight {
+    public float hallwayHeight {
         
         get; private set;
     
@@ -37,7 +37,7 @@ public class MazeConstructor : MonoBehaviour {
     
     }
 
-    public int startCol {
+    public int startColumn {
     
         get; private set;
     
@@ -49,7 +49,7 @@ public class MazeConstructor : MonoBehaviour {
     
     }
 
-    public int goalCol {
+    public int goalColumn {
     
         get; private set;
     
@@ -77,20 +77,20 @@ public class MazeConstructor : MonoBehaviour {
         go.name = "Procedural Maze";
         go.tag = "Generated";
 
-        MeshFilter mf = go.AddComponent<MeshFilter>();
-        mf.mesh = meshGenerator.FromData(data);
+        MeshFilter meshFilter = go.AddComponent<MeshFilter>();
+        meshFilter.mesh = meshGenerator.FromData(data);
     
-        MeshCollider mc = go.AddComponent<MeshCollider>();
-        mc.sharedMesh = mf.mesh;
+        MeshCollider meshCollider = go.AddComponent<MeshCollider>();
+        meshCollider.sharedMesh = meshFilter.mesh;
 
-        MeshRenderer mr = go.AddComponent<MeshRenderer>();
-        mr.materials = new Material[2] {mazeMat1, mazeMat2};
+        MeshRenderer meshRenderer = go.AddComponent<MeshRenderer>();
+        meshRenderer.materials = new Material[2] {mazeMaterial1, mazeMaterial2};
 
     }
     
-    public void GenerateNewMaze(int sizeRows, int sizeCols, TriggerEventHandler startCallback=null, TriggerEventHandler goalCallback=null) {
+    public void GenerateNewMaze(int sizeRows, int sizeColumns, TriggerEventHandler startCallback=null, TriggerEventHandler goalCallback=null) {
         
-        if (sizeRows % 2 == 0 && sizeCols % 2 == 0) {
+        if (sizeRows % 2 == 0 && sizeColumns % 2 == 0) {
             
             Debug.LogError("Odd numbers work better for dungeon size.");
         
@@ -98,13 +98,13 @@ public class MazeConstructor : MonoBehaviour {
 
         DisposeOldMaze();
 
-        data = dataGenerator.FromDimensions(sizeRows, sizeCols);
+        data = dataGenerator.FromDimensions(sizeRows, sizeColumns);
 
         FindStartPosition();
         FindGoalPosition();
 
-        hallWidth = meshGenerator.width;
-        hallHeight = meshGenerator.height;
+        hallwayWidth = meshGenerator.mazeWidth;
+        hallwayHeight = meshGenerator.mazeHeight;
 
         DisplayMaze();
 
@@ -115,16 +115,16 @@ public class MazeConstructor : MonoBehaviour {
 
     private void FindStartPosition() {
 
-        int[,] maze = data;
-        int rMax = maze.GetUpperBound(0);
-        int cMax = maze.GetUpperBound(1);
+        int[,] startMaze = data;
+        int maxRows = startMaze.GetUpperBound(0);
+        int maxColumns = startMaze.GetUpperBound(1);
 
-        for (int i = 0; i <= rMax; i++) {
-            for (int j = 0; j <= cMax; j++) {
-                if (maze[i, j] == 0) {
+        for (int i = 0; i <= maxRows; i++) {
+            for (int j = 0; j <= maxColumns; j++) {
+                if (startMaze[i, j] == 0) {
 
                     startRow = i;
-                    startCol = j;
+                    startColumn = j;
                     return;
 
                 }
@@ -145,16 +145,16 @@ public class MazeConstructor : MonoBehaviour {
 
     private void FindGoalPosition() {
     
-        int[,] maze = data;
-        int rMax = maze.GetUpperBound(0);
-        int cMax = maze.GetUpperBound(1);
+        int[,] goalMaze = data;
+        int maxRows = goalMaze.GetUpperBound(0);
+        int maxColumns = goalMaze.GetUpperBound(1);
 
-        for (int i = rMax; i >= 0; i--) {
-            for (int j = cMax; j >= 0; j--) {
-                if (maze[i, j] == 0) {
+        for (int i = maxRows; i >= 0; i--) {
+            for (int j = maxColumns; j >= 0; j--) {
+                if (goalMaze[i, j] == 0) {
 
                     goalRow = i;
-                    goalCol = j;
+                    goalColumn = j;
                     return;
 
                 }
@@ -164,31 +164,31 @@ public class MazeConstructor : MonoBehaviour {
 
     private void PlaceStartTrigger(TriggerEventHandler callback) {
         
-        GameObject go = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        go.transform.position = new Vector3(startCol * hallWidth, .5f, startRow * hallWidth);
-        go.name = "Start Trigger";
-        go.tag = "Generated";
+        GameObject startTrigger = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        startTrigger.transform.position = new Vector3(startColumn * hallwayWidth, .5f, startRow * hallwayWidth);
+        startTrigger.name = "Start Trigger";
+        startTrigger.tag = "Generated";
 
-        go.GetComponent<BoxCollider>().isTrigger = true;
-        go.GetComponent<MeshRenderer>().sharedMaterial = startMat;
+        startTrigger.GetComponent<BoxCollider>().isTrigger = true;
+        startTrigger.GetComponent<MeshRenderer>().sharedMaterial = startMaterial;
 
-        TriggerEventRouter tc = go.AddComponent<TriggerEventRouter>();
-        tc.callback = callback;
+        TriggerEventRouter triggerEvent = startTrigger.AddComponent<TriggerEventRouter>();
+        triggerEvent.callback = callback;
     
     }
 
     private void PlaceGoalTrigger(TriggerEventHandler callback) {
-        
-        GameObject go = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        go.transform.position = new Vector3(goalCol * hallWidth, .5f, goalRow * hallWidth);
-        go.name = "Treasure";
-        go.tag = "Generated";
 
-        go.GetComponent<BoxCollider>().isTrigger = true;
-        go.GetComponent<MeshRenderer>().sharedMaterial = treasureMat;
+        GameObject goalTrigger = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        goalTrigger.transform.position = new Vector3(goalColumn * hallwayWidth, .5f, goalRow * hallwayWidth);
+        goalTrigger.name = "Treasure";
+        goalTrigger.tag = "Generated";
 
-        TriggerEventRouter tc = go.AddComponent<TriggerEventRouter>();
-        tc.callback = callback;
+        goalTrigger.GetComponent<BoxCollider>().isTrigger = true;
+        goalTrigger.GetComponent<MeshRenderer>().sharedMaterial = treasureMaterial;
+
+        TriggerEventRouter triggerEvent = goalTrigger.AddComponent<TriggerEventRouter>();
+        triggerEvent.callback = callback;
     
     }
 
@@ -200,32 +200,32 @@ public class MazeConstructor : MonoBehaviour {
 
         }
 
-        int[,] maze = data;
-        int rMax = maze.GetUpperBound(0);
-        int cMax = maze.GetUpperBound(1);
+        int[,] mazeGUI = data;
+        int maxRows = mazeGUI.GetUpperBound(0);
+        int maxColumns = mazeGUI.GetUpperBound(1);
 
-        string msg = "";
+        string message = "";
 
-        for (int i = rMax; i >= 0; i--) {
+        for (int i = maxRows; i >= 0; i--) {
 
-            for (int j = 0; j <= cMax; j++) {
+            for (int j = 0; j <= maxColumns; j++) {
 
-                if (maze[i, j] == 0) {
+                if (mazeGUI[i, j] == 0) {
 
-                    msg += "....";
+                    message += "....";
 
                 } else {
 
-                msg += "==";
+                message += "==";
 
                 }
             }
 
-            msg += "\n";
+            message += "\n";
 
         }
 
-        GUI.Label(new Rect(20, 20, 500, 500), msg);
+        GUI.Label(new Rect(20, 20, 500, 500), message);
 
     }
 

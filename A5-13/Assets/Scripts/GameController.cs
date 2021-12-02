@@ -13,7 +13,7 @@ public class GameController : MonoBehaviour {
     private MazeConstructor generator;
 
     // private int score;
-    private bool goalReached;
+    private bool goal;
 
     
     void Start() {
@@ -36,12 +36,12 @@ public class GameController : MonoBehaviour {
 
         generator.GenerateNewMaze(13, 15, OnStartTrigger, OnGoalTrigger);
 
-        float x = generator.startCol * generator.hallWidth;
+        float x = generator.startColumn * generator.hallwayWidth;
         float y = 1;
-        float z = generator.startRow * generator.hallWidth;
+        float z = generator.startRow * generator.hallwayWidth;
         player.transform.position = new Vector3(x, y, z);
 
-        goalReached = false;
+        goal = false;
         player.enabled = true;
 
     }
@@ -58,7 +58,7 @@ public class GameController : MonoBehaviour {
     private void OnGoalTrigger(GameObject trigger, GameObject other) {
         
         Debug.Log("Goal!");
-        goalReached = true;
+        goal = true;
 
         // score += 1;
         // scoreLabel.text = score.ToString();
@@ -69,7 +69,7 @@ public class GameController : MonoBehaviour {
 
     private void OnStartTrigger(GameObject trigger, GameObject other) {
 
-        if (goalReached) {
+        if (goal) {
 
             Debug.Log("Finish!");
             player.enabled = false;

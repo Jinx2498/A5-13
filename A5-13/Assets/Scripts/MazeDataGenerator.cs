@@ -4,37 +4,37 @@ using UnityEngine;
 
 public class MazeDataGenerator {
 
-    public float placementThreshold;
+    public float threshold;
 
     public MazeDataGenerator() {
 
-        placementThreshold = .1f;   
+        threshold = .1f;   
                                  
     }
 
-    public int[,] FromDimensions(int sizeRows, int sizeCols) {
+    public int[,] FromDimensions(int rows_Size, int columns_Size) {
 
-        int[,] maze = new int[sizeRows, sizeCols];
+        int[,] mazeData = new int [rows_Size, columns_Size];
         
-        int rMax = maze.GetUpperBound(0);
-        int cMax = maze.GetUpperBound(1);
+        int maxRows = mazeData.GetUpperBound(0);
+        int maxColumns = mazeData.GetUpperBound(1);
 
-        for (int i = 0; i <= rMax; i++) {
-            for (int j = 0; j <= cMax; j++) {
+        for (int i = 0; i <= maxRows; i++) {
+            for (int j = 0; j <= maxColumns; j++) {
             
-                if (i == 0 || j == 0 || i == rMax || j == cMax) {
+                if (i == 0 || j == 0 || i == maxRows || j == maxColumns) {
 
-                    maze[i, j] = 1;
+                    mazeData[i, j] = 1;
 
                 } else if (i % 2 == 0 && j % 2 == 0) {
 
-                    if (Random.value > placementThreshold) {
+                    if (Random.value > threshold) {
                     
-                        maze[i, j] = 1;
+                        mazeData[i, j] = 1;
 
                         int a = Random.value < .5 ? 0 : (Random.value < .5 ? -1 : 1);
                         int b = a != 0 ? 0 : (Random.value < .5 ? -1 : 1);
-                        maze[i+a, j+b] = 1;
+                        mazeData[i+a, j+b] = 1;
                     }
 
                 }
@@ -43,8 +43,8 @@ public class MazeDataGenerator {
 
         }
 
-        return maze;
+        return mazeData;
 
     }
-    
+
 }
