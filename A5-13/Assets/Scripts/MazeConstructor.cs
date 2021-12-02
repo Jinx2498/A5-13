@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class MazeConstructor : MonoBehaviour {
     
@@ -12,6 +13,8 @@ public class MazeConstructor : MonoBehaviour {
     [SerializeField] private Material treasureMaterial;
     private MazeDataGenerator dataGenerator;
     private MazeMeshGenerator meshGenerator;
+
+    public NavMeshSurface surface;
 
     public int[,] data {
 
@@ -53,6 +56,11 @@ public class MazeConstructor : MonoBehaviour {
     
         get; private set;
     
+    }
+
+    void Start()
+    {
+        surface.BuildNavMesh();
     }
 
     void Awake() {
