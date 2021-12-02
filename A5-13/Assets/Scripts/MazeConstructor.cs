@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class MazeConstructor : MonoBehaviour {
     
@@ -12,6 +13,8 @@ public class MazeConstructor : MonoBehaviour {
     [SerializeField] private Material treasureMaterial;
     private MazeDataGenerator dataGenerator;
     private MazeMeshGenerator meshGenerator;
+
+    public NavMeshSurface surface;
 
     public int[,] data {
 
@@ -55,6 +58,11 @@ public class MazeConstructor : MonoBehaviour {
     
     }
 
+    void Start()
+    {
+        surface.BuildNavMesh();
+    }
+
     void Awake() {
 
         meshGenerator = new MazeMeshGenerator();
@@ -92,7 +100,7 @@ public class MazeConstructor : MonoBehaviour {
         
         if (sizeRows % 2 == 0 && sizeColumns % 2 == 0) {
             
-            Debug.LogError("Odd numbers work better for dungeon size.");
+            Debug.LogError("Odd numbers work better.");
         
         }
 
@@ -189,6 +197,8 @@ public class MazeConstructor : MonoBehaviour {
         startTrigger.name = "Start Trigger";
         startTrigger.tag = "Generated";
 
+        startTrigger.layer = LayerMask.NameToLayer("Goal");
+
         startTrigger.GetComponent<BoxCollider>().isTrigger = true;
         startTrigger.GetComponent<MeshRenderer>().sharedMaterial = startMaterial;
 
@@ -203,6 +213,8 @@ public class MazeConstructor : MonoBehaviour {
         goalTrigger.transform.position = new Vector3(goalColumn * hallwayWidth, .5f, goalRow * hallwayWidth);
         goalTrigger.name = "Treasure";
         goalTrigger.tag = "Generated";
+
+        goalTrigger.layer = LayerMask.NameToLayer("Goal");
 
         goalTrigger.GetComponent<BoxCollider>().isTrigger = true;
         goalTrigger.GetComponent<MeshRenderer>().sharedMaterial = treasureMaterial;
