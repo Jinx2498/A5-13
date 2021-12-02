@@ -177,6 +177,8 @@ public class MazeConstructor : MonoBehaviour {
         startTrigger.name = "Start Trigger";
         startTrigger.tag = "Generated";
 
+        startTrigger.layer = LayerMask.NameToLayer("Goal");
+
         startTrigger.GetComponent<BoxCollider>().isTrigger = true;
         startTrigger.GetComponent<MeshRenderer>().sharedMaterial = startMaterial;
 
@@ -191,6 +193,8 @@ public class MazeConstructor : MonoBehaviour {
         goalTrigger.transform.position = new Vector3(goalColumn * hallwayWidth, .5f, goalRow * hallwayWidth);
         goalTrigger.name = "Treasure";
         goalTrigger.tag = "Generated";
+
+        goalTrigger.layer = LayerMask.NameToLayer("Goal");
 
         goalTrigger.GetComponent<BoxCollider>().isTrigger = true;
         goalTrigger.GetComponent<MeshRenderer>().sharedMaterial = treasureMaterial;
