@@ -112,6 +112,24 @@ public class MazeConstructor : MonoBehaviour {
         PlaceGoalTrigger(goalCallback);
 
         // place coins in maze
+        Debug.Log("maxrows: " + data.GetUpperBound(0));
+        Debug.Log("maxcols: " + data.GetUpperBound(1));
+        GameObject coin0 = GameObject.Find("CoinTemplate");
+        int numCoins = Random.Range(4, 8);
+        for (int i = 0; i < numCoins; ++i)
+        {
+            // regenerate coin position if spawns in wall
+            int rowNum, colNum;
+            do
+            {
+                rowNum = Random.Range(2, data.GetUpperBound(0) - 1);
+                colNum = Random.Range(2, data.GetUpperBound(1) - 1);
+            }
+            while (data[rowNum, colNum] != 0);
+
+            Vector3 newPos = new Vector3(3.75f * colNum, 1, 3.75f * rowNum);
+            GameObject.Instantiate(coin0).transform.position = newPos;
+        }
 
     }
 
