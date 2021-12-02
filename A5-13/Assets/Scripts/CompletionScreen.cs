@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CompletionScreen : MonoBehaviour
 {
-    // Start is called before the first frame update
+    
     void Start()
     {
         Scores score = GameObject.Find("Scores").GetComponent<Scores>();
