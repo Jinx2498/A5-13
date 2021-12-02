@@ -10,7 +10,7 @@ public class MazeConstructor : MonoBehaviour {
     [SerializeField] private Material mazeMaterial1;
     [SerializeField] private Material mazeMaterial2;
     [SerializeField] private Material startMaterial;
-    [SerializeField] private Material endMaterial;
+    [SerializeField] private Material treasureMaterial;
     private MazeDataGenerator dataGenerator;
     private MazeMeshGenerator meshGenerator;
 
@@ -119,6 +119,24 @@ public class MazeConstructor : MonoBehaviour {
         PlaceStartTrigger(startCallback);
         PlaceGoalTrigger(goalCallback);
 
+        // place coins in maze
+        GameObject coin0 = GameObject.Find("CoinTemplate");
+        int numCoins = Random.Range(4, 8);
+        for (int i = 0; i < numCoins; ++i)
+        {
+            // regenerate coin position if spawns in wall
+            int rowNum, colNum;
+            do
+            {
+                rowNum = Random.Range(2, data.GetUpperBound(0) - 1);
+                colNum = Random.Range(2, data.GetUpperBound(1) - 1);
+            }
+            while (data[rowNum, colNum] != 0);
+
+            Vector3 newPos = new Vector3(3.75f * colNum, 1, 3.75f * rowNum);
+            GameObject.Instantiate(coin0).transform.position = newPos;
+        }
+
     }
 
     private void FindStartPosition() {
@@ -177,6 +195,8 @@ public class MazeConstructor : MonoBehaviour {
         startTrigger.name = "Start Trigger";
         startTrigger.tag = "Generated";
 
+        startTrigger.layer = LayerMask.NameToLayer("Goal");
+
         startTrigger.GetComponent<BoxCollider>().isTrigger = true;
         startTrigger.GetComponent<MeshRenderer>().sharedMaterial = startMaterial;
 
@@ -189,11 +209,13 @@ public class MazeConstructor : MonoBehaviour {
 
         GameObject goalTrigger = GameObject.CreatePrimitive(PrimitiveType.Cube);
         goalTrigger.transform.position = new Vector3(goalColumn * hallwayWidth, .5f, goalRow * hallwayWidth);
-        goalTrigger.name = "End";
+        goalTrigger.name = "Treasure";
         goalTrigger.tag = "Generated";
 
+        goalTrigger.layer = LayerMask.NameToLayer("Goal");
+
         goalTrigger.GetComponent<BoxCollider>().isTrigger = true;
-        goalTrigger.GetComponent<MeshRenderer>().sharedMaterial = endMaterial;
+        goalTrigger.GetComponent<MeshRenderer>().sharedMaterial = treasureMaterial;
 
         TriggerEventRouter triggerEvent = goalTrigger.AddComponent<TriggerEventRouter>();
         triggerEvent.callback = callback;

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(MazeConstructor))]
 
@@ -55,16 +56,10 @@ public class GameController : MonoBehaviour {
         }
     }
 
-    private void OnGoalTrigger(GameObject trigger, GameObject other) {
-        
-        Debug.Log("Goal!");
-        goal = true;
-
-        // score += 1;
-        // scoreLabel.text = score.ToString();
-
-        Destroy(trigger);
-
+    private void OnGoalTrigger(GameObject trigger, GameObject other)
+    {
+        Debug.Log("TODO next level");
+        SceneManager.LoadScene("Level1");
     }
 
     private void OnStartTrigger(GameObject trigger, GameObject other) {
